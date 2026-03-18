@@ -25,11 +25,11 @@ describe('ArticleService', () => {
   });
 
   it('fetchArticles returns data from the API', async () => {
-    vi.spyOn(axios, 'get').mockResolvedValueOnce({ data: mockArticles });
+    const getSpy = vi.spyOn(axios, 'get').mockResolvedValueOnce({ data: mockArticles });
 
     const result = await service.fetchArticles();
 
-    expect(axios.get).toHaveBeenCalledOnce();
+    expect(getSpy).toHaveBeenCalledOnce();
     expect(result).toEqual(mockArticles);
   });
 
