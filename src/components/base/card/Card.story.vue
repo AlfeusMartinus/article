@@ -2,9 +2,7 @@
   <Story title="Base/Card" group="base" :layout="{ type: 'single', width: 380 }">
     <Variant title="Default">
       <Card>
-        <div class="story-slot-demo">
-          Slot content renders here inside the card.
-        </div>
+        <div class="story-slot-demo">Slot content renders here inside the card.</div>
       </Card>
     </Variant>
 
@@ -13,18 +11,28 @@
         <img
           src="https://picsum.photos/600/400?random=10"
           alt="Preview"
-          style="width: 100%; aspect-ratio: 3/2; object-fit: cover; display: block; border-radius: 10px; margin: 12px 12px 0; width: calc(100% - 24px);"
+          style="
+            width: 100%;
+            aspect-ratio: 3/2;
+            object-fit: cover;
+            display: block;
+            border-radius: 10px;
+            margin: 12px 12px 0;
+            width: calc(100% - 24px);
+          "
         />
         <div class="story-slot-demo">
           <strong>Card Title</strong>
-          <p style="font-size: 13px; color: #6b7280; margin-top: 8px;">Any content can be slotted inside this base card.</p>
+          <p style="font-size: 13px; color: #6b7280; margin-top: 8px">
+            Any content can be slotted inside this base card.
+          </p>
         </div>
       </Card>
     </Variant>
 
     <Variant title="Minimal (No Content)">
       <Card>
-        <div style="height: 120px;" />
+        <div style="height: 120px" />
       </Card>
     </Variant>
 
@@ -75,12 +83,12 @@ This component has no props — its entire content is provided via the default *
 
 ## Variants
 
-| Variant | Description |
-|---|---|
-| Default | Plain slot usage |
-| With Image & Text | Shows a typical article-like composition |
-| Minimal | Just an empty box to test sizing |
-| Playground | Interactive — modify the slot content via controls |
+| Variant           | Description                                        |
+| ----------------- | -------------------------------------------------- |
+| Default           | Plain slot usage                                   |
+| With Image & Text | Shows a typical article-like composition           |
+| Minimal           | Just an empty box to test sizing                   |
+| Playground        | Interactive — modify the slot content via controls |
 
 ## Notes
 

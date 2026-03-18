@@ -72,7 +72,7 @@ describe('useArticleStore', () => {
 
   it('sets error when fetch fails', async () => {
     vi.spyOn(articleServiceModule.articleService, 'fetchArticles').mockRejectedValue(
-      new Error('Network Error')
+      new Error('Network Error'),
     );
 
     const store = useArticleStore();

@@ -34,7 +34,8 @@ import { mockSponsoredArticle } from 'src/test-utils/fixtures/article.fixtures';
 import type { SponsoredArticle } from 'src/types/article';
 
 const longTitleSponsored: SponsoredArticle = {
-  title: 'This Sponsored Article Has An Extremely Long Title To Test The Clamp Behaviour Extensively',
+  title:
+    'This Sponsored Article Has An Extremely Long Title To Test The Clamp Behaviour Extensively',
   cover: 'https://picsum.photos/600/400?random=40',
   summary: 'Short sponsored summary.',
   bookmarked: true,
@@ -73,9 +74,9 @@ Displays a promoted/sponsored article with a distinct visual treatment. Used in 
 
 ## Props
 
-| Prop | Type | Required | Description |
-|---|---|---|---|
-| `article` | `SponsoredArticle` | ✅ | Sponsored article data (must have `isSponsored: true`) |
+| Prop      | Type               | Required | Description                                            |
+| --------- | ------------------ | -------- | ------------------------------------------------------ |
+| `article` | `SponsoredArticle` | ✅       | Sponsored article data (must have `isSponsored: true`) |
 
 ## SponsoredArticle Type
 
@@ -87,20 +88,20 @@ interface SponsoredArticle extends Article {
 
 ## Variants
 
-| Variant | Description |
-|---|---|
-| Default | Standard sponsored card |
-| Long Title | Tests 2-line clamp on title |
-| Short Summary | Tests flex-grow stretch in grid row |
-| Playground | Fully interactive — controls all props live |
+| Variant       | Description                                 |
+| ------------- | ------------------------------------------- |
+| Default       | Standard sponsored card                     |
+| Long Title    | Tests 2-line clamp on title                 |
+| Short Summary | Tests flex-grow stretch in grid row         |
+| Playground    | Fully interactive — controls all props live |
 
 ## Visual Differences from ArticleCard
 
-| Feature | ArticleCard | SponsoredCard |
-|---|---|---|
-| Label | ❌ | ✅ "Sponsored Ad" (blue) |
-| Tag icon color | Gray | Blue |
-| Footer layout | Actions only (right-aligned) | Label left + Actions right |
+| Feature        | ArticleCard                  | SponsoredCard              |
+| -------------- | ---------------------------- | -------------------------- |
+| Label          | ❌                           | ✅ "Sponsored Ad" (blue)   |
+| Tag icon color | Gray                         | Blue                       |
+| Footer layout  | Actions only (right-aligned) | Label left + Actions right |
 
 ## Notes
 

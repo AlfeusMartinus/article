@@ -37,7 +37,8 @@ import { mockArticle, mockArticleBookmarked } from 'src/test-utils/fixtures/arti
 import type { Article } from 'src/types/article';
 
 const longTitleArticle: Article = {
-  title: 'This Is A Very Long Article Title That Should Get Properly Clamped After Two Lines Of Text',
+  title:
+    'This Is A Very Long Article Title That Should Get Properly Clamped After Two Lines Of Text',
   cover: 'https://picsum.photos/600/400?random=20',
   summary: 'Short summary here.',
   bookmarked: false,
@@ -74,9 +75,9 @@ Displays a single regular article entry. Used within `ArticleGrid` for normal fe
 
 ## Props
 
-| Prop | Type | Required | Description |
-|---|---|---|---|
-| `article` | `Article` | ✅ | The article data object to display |
+| Prop      | Type      | Required | Description                        |
+| --------- | --------- | -------- | ---------------------------------- |
+| `article` | `Article` | ✅       | The article data object to display |
 
 ## Article Type
 
@@ -92,13 +93,13 @@ interface Article {
 
 ## Variants
 
-| Variant | Description |
-|---|---|
-| Default | Standard article, not bookmarked |
-| Bookmarked | Same article with `bookmarked: true` (bookmark icon changes) |
-| Long Title | Tests how title gets clamped after 2 lines |
-| Short Summary | Tests how the card stretches to fill row height |
-| Playground | Fully interactive — controls all props live |
+| Variant       | Description                                                  |
+| ------------- | ------------------------------------------------------------ |
+| Default       | Standard article, not bookmarked                             |
+| Bookmarked    | Same article with `bookmarked: true` (bookmark icon changes) |
+| Long Title    | Tests how title gets clamped after 2 lines                   |
+| Short Summary | Tests how the card stretches to fill row height              |
+| Playground    | Fully interactive — controls all props live                  |
 
 ## Notes
 
