@@ -34,11 +34,11 @@ test.describe('Article List Page', () => {
     await expect(label).toHaveText('Sponsored Ad');
   });
 
-  test('the 5th item in the feed is a sponsored card', async ({ page }) => {
+  test('the 4th item in the feed is a sponsored card', async ({ page }) => {
     await page.waitForSelector('[data-testid="article-grid"]', { timeout: 10000 });
     const gridItems = page.locator('[data-testid="article-grid"] > div');
-    const fifthItem = gridItems.nth(4);
-    const sponsored = fifthItem.locator('[data-testid="sponsored-card"]');
+    const fourthItem = gridItems.nth(3);
+    const sponsored = fourthItem.locator('[data-testid="sponsored-card"]');
     await expect(sponsored).toBeVisible();
   });
 });
