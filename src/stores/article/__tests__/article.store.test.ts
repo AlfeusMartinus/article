@@ -22,8 +22,7 @@ describe('useArticleStore', () => {
     expect(store.loading).toBe(false);
     expect(store.error).toBeNull();
     expect(store.articles).toEqual([]);
-    // Ensure 'ads' is no longer in state
-    expect((store as any).ads).toBeUndefined();
+    expect((store as unknown as { ads: unknown }).ads).toBeUndefined();
   });
 
   it('loadArticles sets loading to true then false', async () => {
