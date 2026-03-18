@@ -1,5 +1,5 @@
 <template>
-  <BaseCard data-testid="sponsored-card">
+  <Card data-testid="sponsored-card">
     <div class="sponsored-card__cover-wrapper">
       <img :src="article.cover" :alt="article.title" class="sponsored-card__cover" />
     </div>
@@ -14,23 +14,16 @@
         <div class="sponsored-card__actions">
           <span class="sponsored-card__likes">{{ article.likes }}</span>
           <q-btn flat round dense icon="favorite_border" class="action-btn" size="sm" />
-          <q-btn
-            flat
-            round
-            dense
-            icon="bookmark"
-            class="action-btn action-btn--sponsored"
-            size="sm"
-          />
+          <q-btn flat round dense icon="sell" class="action-btn action-btn--sponsored" size="sm" />
           <q-btn flat round dense icon="share" class="action-btn" size="sm" />
         </div>
       </div>
     </div>
-  </BaseCard>
+  </Card>
 </template>
 
 <script setup lang="ts">
-import BaseCard from 'src/components/base/BaseCard.vue';
+import Card from 'src/components/base/card/Card.vue';
 import type { SponsoredArticle } from 'src/types/article';
 
 defineProps<{
@@ -43,86 +36,83 @@ defineProps<{
   &__cover-wrapper {
     width: 100%;
     aspect-ratio: 3 / 2;
-    overflow: hidden;
+    padding: 12px 12px 0 12px;
   }
 
   &__cover {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 10px;
     display: block;
     transition: transform 0.3s ease;
-
-    &:hover {
-      transform: scale(1.04);
-    }
   }
 
   &__body {
-    padding: 16px 16px 12px;
+    padding: 20px 24px 16px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
   }
 
   &__title {
-    font-size: 17px;
-    font-weight: 600;
-    line-height: 1.4;
-    color: #1a1a2e;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.25;
+    color: #111827;
     margin: 0;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
 
   &__summary {
-    font-size: 13px;
-    line-height: 1.6;
-    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #374151;
     margin: 0;
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
 
   &__footer {
-    margin-top: 8px;
-    border-top: 1px solid #f3f4f6;
-    padding-top: 8px;
+    margin-top: 4px;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 
   &__label {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     color: #2563eb;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
   }
 
   &__actions {
     display: flex;
     align-items: center;
-    gap: 2px;
+    gap: 8px;
   }
 
   &__likes {
-    font-size: 13px;
-    font-weight: 500;
-    color: #374151;
-    margin-right: 2px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+    margin-right: 4px;
   }
 }
 
 .action-btn {
-  color: #6b7280;
+  color: #374151;
 
   &:hover {
-    color: #1a1a2e;
+    color: #111827;
   }
 
   &--sponsored {

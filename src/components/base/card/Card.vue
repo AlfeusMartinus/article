@@ -1,5 +1,5 @@
 <template>
-  <div class="base-card">
+  <div class="card">
     <slot />
   </div>
 </template>
@@ -7,7 +7,7 @@
 <script setup lang="ts"></script>
 
 <style scoped lang="scss">
-.base-card {
+.card {
   background: #ffffff;
   border-radius: 12px;
   overflow: hidden;
