@@ -50,7 +50,6 @@ describe('useArticleStore', () => {
     const store = useArticleStore();
     await store.loadArticles();
 
-    // The store identifies primes based on 0-based index: 3, 5, 7, 11...
     const expectedSponsoredIndices = [3, 5, 7, 11];
 
     store.feed.forEach((item, index) => {
@@ -68,6 +67,18 @@ describe('useArticleStore', () => {
       (item) => 'isSponsored' in item && item.isSponsored,
     );
     expect(firstSponsoredIndex).toBe(3);
+  });
+
+  it('sets generic error message when a non-Error is thrown', async () => {
+    vi.spyOn(articleServiceModule.articleService, 'fetchArticles').mockRejectedValue(
+      'unknown error string',
+    );
+
+    const store = useArticleStore();
+    await store.loadArticles();
+
+    expect(store.error).toBe('Failed to load articles');
+    expect(store.loading).toBe(false);
   });
 
   it('sets error when fetch fails', async () => {
