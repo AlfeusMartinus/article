@@ -1,13 +1,12 @@
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
-import { Quasar } from 'quasar';
 import ArticleCard from 'src/components/article/ArticleCard.vue';
 import { mockArticle } from 'src/test-utils/fixtures/article.fixtures';
 
 function mountArticleCard() {
   return mount(ArticleCard, {
     props: { article: mockArticle },
-    global: { plugins: [Quasar] },
+    global: { stubs: ['q-btn'] },
   });
 }
 

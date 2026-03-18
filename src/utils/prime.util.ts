@@ -7,11 +7,3 @@ export function isPrime(n: number): boolean {
   }
   return true;
 }
-
-export function getPrimeIndicesAbove3(max: number): number[] {
-  const result: number[] = [];
-  for (let i = 5; i <= max; i++) {
-    if (isPrime(i)) result.push(i);
-  }
-  return result;
-}

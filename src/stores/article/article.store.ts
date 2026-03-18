@@ -1,34 +1,25 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import { articleService } from 'src/services/article.service';
-import { getPrimeIndicesAbove3 } from 'src/utils/prime.util';
+import { isPrime } from 'src/utils/prime.util';
 import type { Article, FeedItem, SponsoredArticle } from 'src/types/article';
 
 export const useArticleStore = defineStore('article', () => {
   const articles = ref<Article[]>([]);
-  const ads = ref<Article[]>([]);
   const loading = ref(false);
   const error = ref<string | null>(null);
 
   const feed = computed<FeedItem[]>(() => {
-    const result: FeedItem[] = [...articles.value];
-    const primeIndices = getPrimeIndicesAbove3(result.length + ads.value.length);
-    let adIndex = 0;
-
-    for (const prime of primeIndices) {
-      const insertAt = prime - 1;
-      if (insertAt > result.length || adIndex >= ads.value.length) break;
-
-      const sponsored = {
-        ...ads.value[adIndex % ads.value.length],
-        isSponsored: true,
-      } as SponsoredArticle;
-
-      result.splice(insertAt, 0, sponsored);
-      adIndex++;
-    }
-
-    return result;
+    return articles.value.map((article, index) => {
+      // index prima di atas 3 (3, 5, 7, 11...)
+      if (index >= 3 && isPrime(index)) {
+        return {
+          ...article,
+          isSponsored: true,
+        } as SponsoredArticle;
+      }
+      return article;
+    });
   });
 
   async function loadArticles(): Promise<void> {
@@ -36,12 +27,7 @@ export const useArticleStore = defineStore('article', () => {
     error.value = null;
 
     try {
-      const [fetchedArticles, fetchedAds] = await Promise.all([
-        articleService.fetchArticles(),
-        articleService.fetchAds(),
-      ]);
-      articles.value = fetchedArticles;
-      ads.value = fetchedAds;
+      articles.value = await articleService.fetchArticles();
     } catch (err) {
       error.value = err instanceof Error ? err.message : 'Failed to load articles';
     } finally {
@@ -49,5 +35,5 @@ export const useArticleStore = defineStore('article', () => {
     }
   }
 
-  return { articles, ads, loading, error, feed, loadArticles };
+  return { articles, loading, error, feed, loadArticles };
 });

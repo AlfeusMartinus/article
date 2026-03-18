@@ -12,23 +12,6 @@ const mockArticles: Article[] = Array.from({ length: 12 }, (_, i) => ({
   likes: i * 3,
 }));
 
-const mockAds: Article[] = [
-  {
-    title: 'Sponsored Article A',
-    cover: 'https://picsum.photos/600/400?random=99',
-    summary: 'This is a sponsored summary.',
-    bookmarked: true,
-    likes: 10,
-  },
-  {
-    title: 'Sponsored Article B',
-    cover: 'https://picsum.photos/600/400?random=98',
-    summary: 'Another sponsored summary.',
-    bookmarked: false,
-    likes: 5,
-  },
-];
-
 describe('useArticleStore', () => {
   beforeEach(() => {
     setActivePinia(createPinia());
@@ -39,12 +22,12 @@ describe('useArticleStore', () => {
     expect(store.loading).toBe(false);
     expect(store.error).toBeNull();
     expect(store.articles).toEqual([]);
-    expect(store.ads).toEqual([]);
+    // Ensure 'ads' is no longer in state
+    expect((store as any).ads).toBeUndefined();
   });
 
   it('loadArticles sets loading to true then false', async () => {
     vi.spyOn(articleServiceModule.articleService, 'fetchArticles').mockResolvedValue(mockArticles);
-    vi.spyOn(articleServiceModule.articleService, 'fetchAds').mockResolvedValue(mockAds);
 
     const store = useArticleStore();
     const promise = store.loadArticles();
@@ -53,39 +36,44 @@ describe('useArticleStore', () => {
     expect(store.loading).toBe(false);
   });
 
-  it('loadArticles populates articles and ads', async () => {
+  it('loadArticles populates articles only', async () => {
     vi.spyOn(articleServiceModule.articleService, 'fetchArticles').mockResolvedValue(mockArticles);
-    vi.spyOn(articleServiceModule.articleService, 'fetchAds').mockResolvedValue(mockAds);
 
     const store = useArticleStore();
     await store.loadArticles();
 
     expect(store.articles).toHaveLength(12);
-    expect(store.ads).toHaveLength(2);
   });
 
-  it('feed inserts sponsored ads at prime indices above 3', async () => {
+  it('feed converts existing articles to sponsored ads at prime indices >= 3', async () => {
     vi.spyOn(articleServiceModule.articleService, 'fetchArticles').mockResolvedValue(mockArticles);
-    vi.spyOn(articleServiceModule.articleService, 'fetchAds').mockResolvedValue(mockAds);
 
     const store = useArticleStore();
     await store.loadArticles();
 
+    // The store identifies primes based on 0-based index: 3, 5, 7, 11...
+    const expectedSponsoredIndices = [3, 5, 7, 11];
+
+    store.feed.forEach((item, index) => {
+      if (expectedSponsoredIndices.includes(index)) {
+        expect('isSponsored' in item && item.isSponsored).toBe(true);
+      } else {
+        expect('isSponsored' in item).toBe(false);
+      }
+    });
+
     const sponsoredItems = store.feed.filter((item) => 'isSponsored' in item && item.isSponsored);
-    expect(sponsoredItems.length).toBeGreaterThan(0);
+    expect(sponsoredItems.length).toBe(4);
 
     const firstSponsoredIndex = store.feed.findIndex(
       (item) => 'isSponsored' in item && item.isSponsored,
     );
-    expect(firstSponsoredIndex).toBe(4);
+    expect(firstSponsoredIndex).toBe(3);
   });
 
   it('sets error when fetch fails', async () => {
     vi.spyOn(articleServiceModule.articleService, 'fetchArticles').mockRejectedValue(
-      new Error('Network Error'),
-    );
-    vi.spyOn(articleServiceModule.articleService, 'fetchAds').mockRejectedValue(
-      new Error('Network Error'),
+      new Error('Network Error')
     );
 
     const store = useArticleStore();
