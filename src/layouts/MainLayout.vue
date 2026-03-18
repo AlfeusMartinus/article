@@ -3,8 +3,8 @@
     <q-header class="main-header">
       <q-toolbar class="main-header__toolbar">
         <q-toolbar-title class="main-header__brand">
-          <q-icon name="newspaper" size="22px" class="main-header__logo-icon" />
-          MediaDigital
+          <q-icon size="22px" class="main-header__logo-icon" />
+          Media Digital Agency
         </q-toolbar-title>
       </q-toolbar>
     </q-header>

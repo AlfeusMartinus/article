@@ -1,5 +1,5 @@
 <template>
-  <Card data-testid="article-card">
+  <Card data-testid="article-card" class="article-card">
     <div class="article-card__cover-wrapper">
       <img :src="article.cover" :alt="article.title" class="article-card__cover" />
     </div>
@@ -47,6 +47,7 @@ defineProps<{
   }
 
   &__body {
+    flex-grow: 1;
     padding: 20px 24px 16px;
     display: flex;
     flex-direction: column;
@@ -79,7 +80,7 @@ defineProps<{
   }
 
   &__footer {
-    margin-top: 4px;
+    margin-top: auto;
   }
 
   &__actions {

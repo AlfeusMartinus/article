@@ -2,7 +2,6 @@
   <q-page class="article-list-page">
     <div class="article-list-page__header">
       <h1 class="article-list-page__heading">Latest Articles</h1>
-      <p class="article-list-page__sub">Stay informed with curated stories from around the world</p>
     </div>
 
     <div v-if="loading" class="article-list-page__loader">

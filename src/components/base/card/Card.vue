@@ -8,6 +8,9 @@
 
 <style scoped lang="scss">
 .card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   background: #ffffff;
   border-radius: 12px;
   overflow: hidden;

@@ -34,6 +34,9 @@ defineProps<{
 
   &__item {
     min-width: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 }
 </style>
